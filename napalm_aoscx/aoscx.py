@@ -49,7 +49,7 @@ import napalm.base.constants as c
 
 # Aruba AOS-CX lib
 import pyaoscx
-from pyaoscx import session, interface, system, common_ops, port, lldp, mac
+from pyaoscx import session, interface, system, common_ops, port, lldp, mac, vrf, arp
 
 class AOSCXDriver(NetworkDriver):
     """NAPALM driver for Aruba AOS-CX."""
@@ -382,15 +382,23 @@ class AOSCXDriver(NetworkDriver):
         cpu_dict = {}
         mem_dict = {}
         for mm in resources_details:
+            if 'cpu' not in mm['resource_utilization']:
+                cpu = 'N/A'
+            else:
+                cpu =  mm['resource_utilization']['cpu']
             new_dict = {
                 mm['name']: {
-                    '%usage': mm['resource_utilization']['cpu']
+                    '%usage': cpu
                 }
             }
             cpu_dict.update(new_dict)
+            if 'memory' not in mm['resource_utilization']:
+               memory = 'N/A'
+            else:
+               memory = mm['resource_utilization']['memory']
             mem_dict = {
                 'available_ram': 'N/A',
-                'used_ram': mm['resource_utilization']['memory']
+                'used_ram': memory
             }
 
         environment = {
