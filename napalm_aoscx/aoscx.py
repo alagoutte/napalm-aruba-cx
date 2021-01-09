@@ -213,7 +213,7 @@ class AOSCXDriver(NetworkDriver):
                         'rx_errors': -1,
                         'tx_discards': -1,
                         'rx_discards': -1,
-                        'tx_octets': interface_details['statistics']['tx_bytes'],
+                        'tx_octets': interface_details['statistics']['tx_bytes'] if 'tx_bytes' not in interface_details['statistics']  else '-1',
                         'rx_octets': interface_details['statistics']['rx_bytes'],
                         'tx_unicast_packets':
                             interface_details['statistics']['if_hc_out_unicast_packets'],
