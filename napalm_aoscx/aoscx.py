@@ -217,19 +217,19 @@ class AOSCXDriver(NetworkDriver):
                         'tx_discards': -1,
                         'rx_discards': -1,
                         'tx_octets': interface_details['statistics']['tx_bytes'] if 'statistics' not in interface_details  else '-1',
-                        'rx_octets': interface_details['statistics']['rx_bytes'],
+                        'rx_octets': interface_details['statistics']['rx_bytes'] if 'statistics' not in interface_details  else '-1',
                         'tx_unicast_packets':
-                            interface_details['statistics']['if_hc_out_unicast_packets'],
+                            interface_details['statistics']['if_hc_out_unicast_packets'] if 'statistics' not in interface_details  else '-1',
                         'rx_unicast_packets':
-                            interface_details['statistics']['if_hc_in_unicast_packets'],
+                            interface_details['statistics']['if_hc_in_unicast_packets'] if 'statistics' not in interface_details  else '-1',
                         'tx_multicast_packets':
-                            interface_details['statistics']['if_out_multicast_packets'],
+                            interface_details['statistics']['if_out_multicast_packets'] if 'statistics' not in interface_details  else '-1',
                         'rx_multicast_packets':
-                            interface_details['statistics']['if_in_multicast_packets'],
+                            interface_details['statistics']['if_in_multicast_packets'] if 'statistics' not in interface_details  else '-1',
                         'tx_broadcast_packets':
-                            interface_details['statistics']['if_out_broadcast_packets'],
+                            interface_details['statistics']['if_out_broadcast_packets'] if 'statistics' not in interface_details  else '-1',
                         'rx_broadcast_packets':
-                            interface_details['statistics']['if_in_broadcast_packets']
+                            interface_details['statistics']['if_in_broadcast_packets'] if 'statistics' not in interface_details  else '-1'
                     }
                 }
             )
