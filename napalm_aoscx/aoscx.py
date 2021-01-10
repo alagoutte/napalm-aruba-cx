@@ -206,6 +206,9 @@ class AOSCXDriver(NetworkDriver):
         for line in interface_list:
             interface_details = pyaoscx.interface.get_interface(line, **self.session_info)
             print(interface_details['name'])
+            print(interface_details['type'])
+            if 'system' not in interface_details['type']: #Skip if it's not system (physical) interface
+                continue
             interface_stats_dictionary.update(
                 {
                     line: {
